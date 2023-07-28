@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./lib/alertjs/alert.css" />
+    <script type="module" src="./lib/alertjs/Alert.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,0" />
+    <title>Sudoku Solver - by Subinay Panda</title>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Sudoku Solver</h1>
+    </header>
+
+    <!-- Sudoku Container -->
+    <div class="sudoku-container">
+        <div id="demo"></div>
+        <div class="femo">
+            <div class="menu">
+                <div>
+                    <span id="eraseBtn" class="material-symbols-outlined">
+                        ink_eraser
+                    </span>
+                    <div class="title">Erase</div>
+                </div>
+                <div>
+                    <span id="resetBtn" class="material-symbols-outlined">
+                        restart_alt
+                    </span>
+                    <div class="title">Reset</div>
+                </div>
+                <div>
+                    <span id="uploadBtn" class="material-symbols-outlined">
+                        upload
+                    </span>
+                    <div class="title">Upload</div>
+                </div>
+                <div>
+                    <span id="cameraBtn" class="material-symbols-outlined">
+                        photo_camera
+                    </span>
+                    <div class="title">Camera</div>
+                </div>
+            </div>
+            <div class="keypad">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+            </div>
+            <button class="solveBtn" onclick="solveSudoku()">Solve</button>
+        </div>    
+    </div>
+
+    <!-- Snackbar Messages -->
+    <div class="snackbar"></div>
+
+    <!-- Footer -->
+    <footer>Made with ❤ by <a target="_blank" href="https://github.com/subinay108">Subinay Panda</a></footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>
