@@ -50,7 +50,7 @@ const loader = document.querySelector('#loading');
 
 // showing loading
 function displayLoading(){
-    demo.innerHTML += '<div id="loading"></div>';
+    demo.innerHTML += '<div id="loading"><div></div></div>';
     // to stop loading after some time
     // setTimeout(() => {
     //     loader.classList.remove('display');
@@ -86,16 +86,28 @@ async function processImage(input){
     imgObject.src = URL.createObjectURL(file);
     imgObject.onload = () => {
         const img = cv.imread(imgObject);
-        sCurrent = new Sudoku(detectText(img));
+        const board = detectText(img);
+        if(board != undefined){
+            sCurrent = new Sudoku(board);
+            // Snackbar alert for sudoku is loaded
+            new Alert({
+                type: 'success',
+                message: 'Sudoku is loaded',
+                expires: true,
+                duration: 2,
+                container: '.snackbar',
+            });
+        }else{
+            // Snackbar alert for Can't detect Sudoku
+            new Alert({
+                type: 'error',
+                message: "Can't detect Sudoku",
+                expires: true,
+                duration: 2,
+                container: '.snackbar',
+            });
+        }
         drawSudoku(sCurrent);
-        // Snackbar alert for sudoku is loaded
-        new Alert({
-            type: 'success',
-            message: 'Sudoku is loaded',
-            expires: true,
-            duration: 2,
-            container: '.snackbar',
-        });
     };
 }
 
