@@ -58,7 +58,7 @@ footer a{
     column-gap: 2px;
     font-weight: 300;
     user-select: none;
-    /* animation: colorize 10s ease-in-out infinite; */
+    position: relative;
 }
 
 @keyframes colorize {
@@ -213,6 +213,36 @@ footer a{
     top: 10px;
     z-index: 10;
 }
+
+.file-input{
+    display: none;
+}
+
+#loading{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 2rem;
+    height: 2rem;
+    border: 5px solid #f3f3f3;
+    border-top: 6px solid #0072e3;
+    border-radius: 50%;
+    /* visibility: hidden; */
+    animation: spin 1s infinite linear;
+}
+#loading.display{
+    visibility: visible;
+}
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
 
 
 /* For desktop devices */

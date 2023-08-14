@@ -1,6 +1,9 @@
 const demo = document.getElementById('demo');
 const keypad = document.querySelectorAll('.keypad button');
 const eraseBtn = document.getElementById('eraseBtn');
+const resetBtn = document.getElementById('resetBtn');
+const uploadFile = document.getElementById('upload');
+const cameraFile = document.getElementById('camera');
 
 function select(str){
     let row = parseInt(str[1]);
@@ -31,46 +34,70 @@ eraseBtn.addEventListener('mousedown', e => {
     // previousKey = key;
 });
 resetBtn.addEventListener('mousedown', e => {
+    uploadFile.value = '';
+    cameraFile.value = '';
     sCurrent = new Sudoku();
     drawSudoku(sCurrent);
-    // console.log(index + 1);
-    // key.style.backgroundColor = '#e6e6e6';
-    // previousKey = key;
-});
-uploadBtn.addEventListener('mousedown', e => {
-    // Snackbar alert for under development
-    new Alert({
-        type: 'info',
-        message: 'Under Development',
-        expires: true,
-        duration: 1,
-        container: '.snackbar',
-    });
-
-    // console.log(index + 1);
-    // key.style.backgroundColor = '#e6e6e6';
-    // previousKey = key;
-});
-cameraBtn.addEventListener('mousedown', e => {
-    // Snackbar alert for under development
-    new Alert({
-        type: 'info',
-        message: 'Under Development',
-        expires: true,
-        duration: 1,
-        container: '.snackbar',
-    });
+    console.log(e.target);
     // console.log(index + 1);
     // key.style.backgroundColor = '#e6e6e6';
     // previousKey = key;
 });
 
-// window.addEventListener('mouseup', e => {
-//     if(previousKey){
-//         previousKey.style.backgroundColor = 'white';
-//         previousKey = undefined;
-//     }
-// });
+
+// selecting loading div
+const loader = document.querySelector('#loading');
+
+// showing loading
+function displayLoading(){
+    demo.innerHTML += '<div id="loading"></div>';
+    // to stop loading after some time
+    // setTimeout(() => {
+    //     loader.classList.remove('display');
+    // }, 5000);
+}
+
+// hiding loading
+function hideLoading(){
+    loader.classList.remove('display');
+}
+
+uploadFile.addEventListener('change', (e) =>{
+    processImage(e.target);
+}
+);
+
+cameraFile.addEventListener('change', (e) =>{
+    processImage(e.target);
+}
+);
+
+async function processImage(input){
+    displayLoading();
+    sCurrent.editable = false;
+    // get file and detectText
+    const file = input.files[0];
+    if (!file) {
+        alert('Please select an image file.');
+        return;
+    }
+    
+    const imgObject = new Image();
+    imgObject.src = URL.createObjectURL(file);
+    imgObject.onload = () => {
+        const img = cv.imread(imgObject);
+        sCurrent = new Sudoku(detectText(img));
+        drawSudoku(sCurrent);
+        // Snackbar alert for sudoku is loaded
+        new Alert({
+            type: 'success',
+            message: 'Sudoku is loaded',
+            expires: true,
+            duration: 2,
+            container: '.snackbar',
+        });
+    };
+}
 
 window.addEventListener('keydown', (e) => {
     // console.log(e.key);
@@ -156,15 +183,7 @@ class Sudoku{
              ];
         }
         else{
-            this.board = [[5,0,0,0,0,0,0,0,9],
-                        [0,9,0,8,0,4,0,3,0],
-                        [0,0,8,0,9,0,4,0,0],
-                        [0,3,0,7,0,2,0,4,0],
-                        [0,0,2,0,0,0,9,0,0],
-                        [0,8,0,1,0,9,0,7,0],
-                        [0,0,9,0,5,0,6,0,0],
-                        [0,1,0,9,0,6,0,5,0],
-                        [7,0,0,0,0,0,0,0,8]];
+            this.board = board;
         }
         
         this.original = JSON.parse(JSON.stringify(this.board));

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./lib/alertjs/alert.css" />
     <script type="module" src="./lib/alertjs/Alert.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,0" />
     <title>Sudoku Solver - by Subinay Panda</title>
 </head>
@@ -17,7 +18,8 @@
 
     <!-- Sudoku Container -->
     <div class="sudoku-container">
-        <div id="demo"></div>
+        <div id="demo">
+        </div>
         <div class="femo">
             <div class="menu">
                 <div>
@@ -33,16 +35,22 @@
                     <div class="title">Reset</div>
                 </div>
                 <div>
-                    <span id="uploadBtn" class="material-symbols-outlined">
-                        upload
-                    </span>
-                    <div class="title">Upload</div>
+                    <label>
+                        <span id="uploadBtn" class="material-symbols-outlined">
+                            upload
+                        </span>
+                        <div class="title">Upload</div>
+                        <input id="upload" type="file" accept="image/*" class="file-input"/>
+                    </label>
                 </div>
                 <div>
-                    <span id="cameraBtn" class="material-symbols-outlined">
-                        photo_camera
-                    </span>
-                    <div class="title">Camera</div>
+                    <label>
+                        <span id="cameraBtn" class="material-symbols-outlined">
+                            photo_camera
+                        </span>
+                        <div class="title">Camera</div>
+                        <input id="camera" type="file" accept="image/*" class="file-input" capture/>
+                    </label>
                 </div>
             </div>
             <div class="keypad">
@@ -65,6 +73,10 @@
 
     <!-- Footer -->
     <footer>Made with ❤ by <a target="_blank" href="https://github.com/subinay108">Subinay Panda</a></footer>
+
+    <!-- OpenCV.js -->
+    <script src="lib/ocr/opencv.js" type="text/javascript"></script>
+    <script src="lib/ocr/ocr.js"></script>
 
     <script src="./script.js"></script>
 </body>
