@@ -704,6 +704,8 @@ function solveSudoku(){
     drawSudoku(sCurrent);
     //Snackbar alert for invalid sudoku
     if(sCurrent.board.toString().split(',').filter(x => x == '0').length > 0){
+        sCurrent = new Sudoku(JSON.parse(JSON.stringify(sCurrent.original)));
+        drawSudoku(sCurrent);
         new Alert({
             type: 'error',
             message: 'Invalid Sudoku',
